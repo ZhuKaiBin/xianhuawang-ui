@@ -1,3 +1,5 @@
+//这里存储所有的HTTP请求的方法
+
 import axios from 'axios'
 import { ref } from 'vue'
 
@@ -10,21 +12,30 @@ export const getBanners = () => {
 
 
 // 这个是请求后端的数据
-const httpRequestAPI = ref("/api")
+const CommondRequestAPIUri = ref("/api")
 export const getAPiImagesRequest2 = () => {
-    return axios.get(httpRequestAPI.value + '/Images/GetImages')
+    return axios.get(CommondRequestAPIUri.value + '/Images/GetImages')
 }
 
 
-
-const GetFlowers = ref("/api")
+//Get方式，获取数据
 export const GetFlowersAPIRequest = () => {
-    return axios.get(GetFlowers.value + '/Flower/GetFlowers')
+    return axios.get(CommondRequestAPIUri.value + '/Flower/GetFlowers')
 }
 
 
-
-const register = ref("/api")
+//Post接口 注册新用户
 export const registerAPIRequest = (parms:{}) => {
-    return axios.post(GetFlowers.value + '/Flower/register',parms)
+    return axios.post(CommondRequestAPIUri.value + '/Flower/register',parms)
 }
+
+
+// 传入一个ID值，后端按照id来筛选数据
+
+export const GetDataByparaAPI = (params = {}) => {
+  return axios.get(CommondRequestAPIUri.value + '/Flower/GetData', {
+    params: params  // 将参数作为 query 参数传递给后端
+  });
+};
+
+

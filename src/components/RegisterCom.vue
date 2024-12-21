@@ -1,48 +1,50 @@
+<!-- 主要是测试前端传入一个form表单，然后呼叫后端 -->
+
 <template>
   <el-dialog v-model="IsShowRegister" title="注册" width="30%" :before-close="handleClose">
-  <p>{{ IsShowRegister }}</p>  <!-- 在页面上显示 IsShowRegister 的值 -->
-  <el-form :model="form" label-width="120px">
-    <el-form-item label="昵称">
-      <el-input v-model="form.Nick"></el-input>
-    </el-form-item>
-    <el-form-item label="用户名">
-      <el-input v-model="form.name"></el-input>
-    </el-form-item>
-    <el-form-item label="密码">
-      <el-input v-model="form.pwd"></el-input>
-    </el-form-item>
-    <el-form-item>
-      <el-button type="primary" @click="Submint">确定</el-button>
-      <el-button @click="CloseRegister">取消</el-button>
-    </el-form-item>
-  </el-form>
-</el-dialog>
+    <p>{{ IsShowRegister }}</p> <!-- 在页面上显示 IsShowRegister 的值 -->
+    <el-form :model="form" label-width="120px">
+      <el-form-item label="昵称">
+        <el-input v-model="form.Nick"></el-input>
+      </el-form-item>
+      <el-form-item label="用户名">
+        <el-input v-model="form.name"></el-input>
+      </el-form-item>
+      <el-form-item label="密码">
+        <el-input v-model="form.pwd"></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click="Submint">确定</el-button>
+        <el-button @click="CloseRegister">取消</el-button>
+      </el-form-item>
+    </el-form>
+  </el-dialog>
 
 </template>
- 
- <script lang="ts" setup>
- import { computed } from 'vue';
- import { useStore } from 'vuex';  // 使用 useStore 来获取 Vuex store 实例
- import { registerAPIRequest } from '../http/index';
 
- const store = useStore();  // 获取 Vuex store 实例
- 
- const IsShowRegister = computed(() => store.state.IsShowRegister);
- 
- const handleClose = (done: () => void) => {
-   store.commit('CloseRegister');
-   done();
- };
+<script lang="ts" setup>
+import { computed,ref } from 'vue';
+import { useStore } from 'vuex';  // 使用 useStore 来获取 Vuex store 实例
+import { registerAPIRequest } from '../http/index';
 
+const store = useStore();  // 获取 Vuex store 实例
 
+const IsShowRegister = computed(() => store.state.IsShowRegister);
+
+const handleClose = (done: () => void) => {
+  store.commit('CloseRegister');
+  done();
+};
+
+const form=ref()
 //定义一个form表单的对象，用于收集信息
- const form={
-  Nick:'',
-  name:'',
-  pwd:''
- };
+form.value = {
+  Nick: '',
+  name: '',
+  pwd: ''
+};
 
- // 提交表单的处理函数
+// 提交表单的处理函数
 const Submint = async () => {
   try {
     console.log(form);
@@ -62,5 +64,4 @@ const CloseRegister = () => {
 };
 
 
- </script>
- 
+</script>

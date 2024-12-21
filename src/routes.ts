@@ -15,6 +15,7 @@ import PostBodyRequest from "./views/apiRequestDemo/PostBodyRequest.vue"
 const router=createRouter({
 history:createWebHistory(),
 
+//这里的配置是指：当url匹配到/loveflower的时候，就会跳转到component:BirthdayFlower这个页面中去
 routes:[
     {path:'/',component:HomePage},
     {path:'/loveflower',component:LoveFlower},
